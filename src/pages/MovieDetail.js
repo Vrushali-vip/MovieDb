@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+const API_KEY = 'c45a857c193f6302f2b5061c3b85e743';
+const BASE_URL = `https://api.themoviedb.org/3/movie`;
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -8,12 +11,12 @@ const MovieDetail = () => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=YOUR_API_KEY&language=en-US`)
+    axios.get(`${BASE_URL}/${id}?api_key=${API_KEY}&language=en-US`)
       .then(response => {
         setMovie(response.data);
       });
 
-    axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=YOUR_API_KEY&language=en-US`)
+    axios.get(`${BASE_URL}/${id}/credits?api_key=${API_KEY}&language=en-US`)
       .then(response => {
         setCast(response.data.cast);
       });
